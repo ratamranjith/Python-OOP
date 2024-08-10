@@ -36,7 +36,7 @@ The script demonstrates the following concepts:
    print(rocket.speed)  # Output: 7.9 km/sec
    ```
 
-3. **Constructor with Arguments**:
+3. **Constructor with Arguments or Parameterized Constructor**:  
 
    - The `Car` class demonstrates a constructor that takes arguments to initialize its attributes. The `__init__()` method accepts `color`, `model`, and `year` as parameters, which are used to set the corresponding attributes during object creation.
 
