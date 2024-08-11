@@ -82,6 +82,31 @@ class Child3(Grandparent3):
         print("Child Method is called")
 
 
+# Hybrid Inheritance
+class Grandparent4:
+    
+    def call_grand(self):
+        print("Grand Parent Inherited Successfully")
+
+class Relative(Grandparent4):
+    def call_relative(self):
+        print("Relative Inherited Successfully")
+
+class Parent4(Grandparent4):
+    def call_parent(self):
+        print("Parent Inherited Successfully")
+
+class Child4(Parent4, Relative):
+    def __init__(self):
+        pass
+
+    def display(self):
+        print("Child Method is called")
+
+
+
+
+
 print("| Single Inheritance", ":"*10, end="\n")
 child = Child()
 child.display()
@@ -106,3 +131,10 @@ child3.display()
 child3.call_grand()
 parent3.call_parent()
 parent3.call_grand()
+print(end="\n\n")
+print("| Hybrid Inheritance", ":"*10, end="\n")
+child4 = Child4()
+child4.display()
+child4.call_grand()
+child4.call_parent()
+child4.call_relative()
