@@ -1,4 +1,6 @@
-# Python: Static Variables and Methods
+# Python: 
+    Static Variables and Methods
+    Class Variables and Methods
 
 ## Description
 
