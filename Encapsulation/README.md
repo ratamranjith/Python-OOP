@@ -3,6 +3,7 @@
 1. Using Private Variables (\_\_variableName)
 2. Using Protected Variables (\_variableName)
 3. Using Private Method (\_\_methodName)
+4. Using Protected Method (\_methodName)
 
 ## 1. Private Variables
 
@@ -225,4 +226,88 @@ account.display_account_info()
 # Note:
 #   If we try to access the private method directly, it will result in an AttributeError:
 #   eg: account.__log_transaction("deposit", 500)  # This will raise an AttributeError.
+```
+
+# 4. Using Protected Method
+
+### Description
+
+This repository demonstrates encapsulation in Python using a protected method. Encapsulation is a fundamental concept in object-oriented programming (OOP) that binds together data and the methods that manipulate that data, helping to protect the internal state of an object while allowing controlled access.
+
+#### Code Explanation
+
+#### Classes
+
+- **BankAccount**: This class represents a bank account with protected attributes for the account holder's name and balance. It includes public methods to deposit and withdraw money, display account information, and a protected method to log transactions.
+- **SavingsAccount**: This subclass of `BankAccount` adds an interest rate attribute and a method to apply interest to the balance. It also utilizes the protected method from `BankAccount` to log interest transactions.
+
+### Key Features
+
+1. **Protected Attributes**:
+
+   - `_account_holder` and `_balance` are protected attributes, meaning they are intended to be accessed within the class and its subclasses.
+
+2. **Public Methods**:
+
+   - `deposit(amount)`: Adds funds to the account while logging the transaction.
+   - `withdraw(amount)`: Withdraws funds from the account with validation checks, and logs the transaction.
+   - `display_account_info()`: Displays the account holder's name and the current balance.
+
+3. **Protected Method**:
+   - `_log_transaction(transaction_type, amount)`: A protected method used to log deposit, withdrawal, and interest transactions. This method is accessible within the class and its subclasses, but it is not intended for public use.
+
+### Example Usage
+
+The code creates an instance of `SavingsAccount` and demonstrates how to use the public methods to interact with the encapsulated data. It also shows how the protected method `_log_transaction` is used internally for logging transactions, and how it can be accessed externally, although it is not recommended.
+
+### Example Code
+
+```python
+class BankAccount:
+    def __init__(self, account_holder, balance):
+        self._account_holder = account_holder
+        self._balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+            self._log_transaction("deposit", amount)
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self._balance:
+            self._balance -= amount
+            self._log_transaction("withdraw", amount)
+        else:
+            print("Invalid withdrawal amount.")
+
+    def display_account_info(self):
+        print(f"Account Holder: {self._account_holder}")
+        print(f"Balance: {self._balance}")
+
+    def _log_transaction(self, transaction_type, amount):
+        # Protected method for logging transactions
+        print(f"Logged {transaction_type} of {amount} for {self._account_holder}.")
+
+class SavingsAccount(BankAccount):
+    def __init__(self, account_holder, balance, interest_rate):
+        super().__init__(account_holder, balance)
+        self._interest_rate = interest_rate
+
+    def apply_interest(self):
+        interest = self._balance * self._interest_rate / 100
+        self._balance += interest
+        self._log_transaction("interest", interest)
+        print(f"Applied interest. New balance is {self._balance}.")
+
+# Example usage:
+account = SavingsAccount("Jane Doe", 1000, 5)
+account.deposit(500)  # Deposited 500. New balance is 1500.
+account.withdraw(200)  # Withdrew 200. New balance is 1300.
+account.apply_interest()  # Applied interest. New balance is 1365.
+account.display_account_info()
+
+# The protected method _log_transaction is accessible but should be used with caution:
+account._log_transaction("manual log", 100)  # This will log the transaction but is not recommended for external use.
 ```
