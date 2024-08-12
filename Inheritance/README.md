@@ -6,15 +6,11 @@ Inheritance is a fundamental concept in object-oriented programming (OOP) that a
 
 **Definition (Simple Way):**
 
-Inheritance is like when you get something from your parents. 
-
-In programming, it means a new class (child) can get features (like variables and functions) from an existing class (parent). 
-
+Inheritance is like when you get something from your parents.
+In programming, it means a new class (child) can get features (like variables and functions) from an existing class (parent).
 This helps us reuse the code and organize it better.
 
-
 ##### Inheritance Types:
-
 1. Single-level Inheritance or Single Inheritance.
    1. Single Inheritance with Super Class
 2. Multi-level Inheritance.
@@ -81,7 +77,7 @@ orange.print()
 
 ###### Code Explanation
 
-### Fruits Class (Super Class):
+##### Fruits Class (Super Class):
 
 * The Fruits class is the superclass with an **init** method that initializes two properties: color and price.
   Orange Class (Sub Class):
