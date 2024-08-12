@@ -10,7 +10,7 @@ Types:
 1. Single Inheritance: A subclass inherits from a single superclass. (parent -> child)
 2. Multiple Inheritance: A subclass inherits from multiple superclasses. (grandparent, parent -> child)
 3. Multilevel Inheritance: A subclass inherits from a superclass that itself inherits from another superclass (grandparent -> parent -> child)
-Hierarchical Inheritance: A superclass can have multiple subclasses (grandparent -> parent, child). The parent class can have multiple child classes, and both child and parent will inherit from grandparents.
+4. Hierarchical Inheritance: A superclass can have multiple subclasses (grandparent -> parent, child). The parent class can have multiple child classes, and both child and parent will inherit from grandparents.
 5. Hybrid Inheritance: A combination of multiple inheritance and multilevel inheritance. (Combination of above 4)
 '''
 
