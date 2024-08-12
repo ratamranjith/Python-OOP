@@ -2,6 +2,7 @@
 
 1. Using Private Variables (\_\_variableName)
 2. Using Protected Variables (\_variableName)
+3. Using Private Method (\_\_methodName)
 
 ## 1. Private Variables
 
@@ -152,4 +153,76 @@ Withdrew 200. New balance is 1300.
 Applied interest. New balance is 1365.
 Account Holder: Jane Doe
 Balance: 1365
+```
+
+# 3. Using Private Method
+
+## Description
+
+This repository demonstrates encapsulation in Python using a private method. Encapsulation is a fundamental concept in object-oriented programming (OOP) that binds together the data and methods that manipulate that data within a single unit, protecting the internal state of the object from external interference.
+
+## Code Explanation
+
+### Class
+
+- **BankAccount**: This class represents a bank account with private attributes for the account holder's name and balance. It also includes public methods to deposit and withdraw money, display account information, and a private method to log transactions.
+
+### Key Features
+
+1. **Private Attributes**:
+
+   - `__account_holder` and `__balance` are private attributes, accessible only within the class, ensuring that the internal state of the object is secure from unauthorized access.
+
+2. **Public Methods**:
+
+   - `deposit(amount)`: Allows for adding funds to the account while logging the transaction.
+   - `withdraw(amount)`: Allows for withdrawing funds from the account with checks to ensure the withdrawal amount is valid, and logs the transaction.
+   - `display_account_info()`: Displays the account holder's name and the current balance.
+
+3. **Private Method**:
+   - `__log_transaction(transaction_type, amount)`: A private method used to log deposit and withdrawal transactions. This method is not accessible from outside the class, highlighting the encapsulation principle.
+
+### Example Usage
+
+The code creates an instance of `BankAccount` and demonstrates how to use the public methods to interact with the encapsulated data and how the private method is used internally for logging transactions.
+
+### Example Code
+
+```python
+class BankAccount:
+    def __init__(self, account_holder, balance):
+        self.__account_holder = account_holder
+        self.__balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            self.__log_transaction("deposit", amount)
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            self.__log_transaction("withdraw", amount)
+        else:
+            print("Invalid withdrawal amount.")
+
+    def display_account_info(self):
+        print(f"Account Holder: {self.__account_holder}")
+        print(f"Balance: {self.__balance}")
+
+    def __log_transaction(self, transaction_type, amount):
+        # Private method for logging transactions
+        print(f"Logged {transaction_type} of {amount} for {self.__account_holder}.")
+
+# Example usage:
+account = BankAccount("John Doe", 1000)
+account.deposit(500)  # Deposited 500. New balance is 1500. Logs the transaction.
+account.withdraw(200)  # Withdrew 200. New balance is 1300. Logs the transaction.
+account.display_account_info()
+
+# Note:
+#   If we try to access the private method directly, it will result in an AttributeError:
+#   eg: account.__log_transaction("deposit", 500)  # This will raise an AttributeError.
 ```
