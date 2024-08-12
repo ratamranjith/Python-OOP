@@ -1,13 +1,11 @@
 '''
-Python: Multiple Inheritance with super class
+Python: Multiple Inheritance with Superclass
 
 Explanation:
-- The following code demonstrates how to use multiple inheritance in Python. 
-- It defines a base class called 'Vehicle' and two subclasses 'Car' and 'Motorcycle'. 
-- The 'Car' class inherits from 'Vehicle' and the 'Motorcycle' class also inherits from 'Vehicle'.
-- The 'Car' class has a method called 'start_engine' and the 'Motorcycle' class has a method called 'start_engine' as well. 
-- However, the 'start_engine' method in the 'Car' class is overridden by the 'start_engine' method in the class. 
-- This is because the 'start_engine' method in the 'Motorcycle' class is called when we call the 'start_engine' method on an instance of the 'Motorcycle' class.
+- This code demonstrates how to use multiple inheritance in Python.
+- It defines a base class called 'Vehicle' and two subclasses 'Car' and 'Motorcycle'.
+- A new class 'HybridVehicle' inherits from both 'Car' and 'Motorcycle', demonstrating multiple inheritance.
+- The 'start_engine' method in 'HybridVehicle' calls the 'start_engine' method from both parent classes, illustrating how multiple inheritance works in Python.
 '''
 
 class Vehicle:
@@ -42,8 +40,18 @@ class Motorcycle(Vehicle):
         super().start_engine()
         print("The motorcycle's engine is running...")
 
-car = Car("Tata", "Sierra", 1999, 4)
-car.start_engine()
+# Multiple inheritance: A hybrid vehicle that can be both a car and a motorcycle
+class HybridVehicle(Car, Motorcycle):
+    def __init__(self, brand, model, year, doors, engine_size):
+        Car.__init__(self, brand, model, year, doors)
+        Motorcycle.__init__(self, brand, model, year, engine_size)
 
-motorCycle = Motorcycle("hero", "splendor", 1995, 2)
-motorCycle.start_engine()
+    def start_engine(self):
+        print("The hybrid vehicle's engine is starting...")
+        Car.start_engine(self)
+        Motorcycle.start_engine(self)
+        print("The hybrid vehicle is running...")
+
+# Example usage
+hybrid = HybridVehicle("Tesla", "Model X", 2023, 4, "Electric")
+hybrid.start_engine()
