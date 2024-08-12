@@ -63,10 +63,12 @@ account.display_account_info()
 
 ### Output
 
+```
 Deposited 500. New balance is 1500.
 Withdrew 200. New balance is 1300.
 Account Holder: John Doe
 Balance: 1300
+```
 
 ## 2. Protected Variables
 
@@ -144,8 +146,10 @@ account.display_account_info()
 
 # Output
 
+```
 Deposited 500. New balance is 1500.
 Withdrew 200. New balance is 1300.
 Applied interest. New balance is 1365.
 Account Holder: Jane Doe
 Balance: 1365
+```
