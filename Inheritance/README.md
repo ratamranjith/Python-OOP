@@ -14,10 +14,11 @@ This helps us reuse the code and organize it better.
 
 1. [Single-level Inheritance or Single Inheritance](#single-inheritance)
    1. [Single Inheritance with Super Class](#11-python-single-inheritance-with-super-class)
-2. Multi-level Inheritance.
-   1. Multi-level Inheritance with Super Class
-3. Multiple Inheritance.
+2. Multiple Inheritance.
    1. Multiple Inheritance with Super Class
+   2. Multiple Inheritance using Super and MRO
+3. Multi-level Inheritance.
+   1. Multi-level Inheritance with Super Class
 4. Hierarchical Inheritance.
    1. Hierarchical Inheritance with Super Class
 5. Hybrid Inheritance.
@@ -198,10 +199,98 @@ class HybridVehicle(Car, Motorcycle):
 hybrid = HybridVehicle("Tesla", "Model X", 2023, 4, "Electric")
 hybrid.start_engine()
 ```
+
 ### Explanation:
-#### Multiple Inheritance: 
-   The HybridVehicle class inherits from both Car and Motorcycle, making it an example of multiple inheritance. This class has access to properties and methods from both parent classes.
-#### Constructor Calls: 
-   In the HybridVehicle constructor, we call the constructors of both Car and Motorcycle to initialize the attributes defined in each.
-#### Method Overriding: 
-   The start_engine method in HybridVehicle overrides the method from both parent classes, and uses super().start_engine() to call the start_engine method from the first class in the inheritance order (which is Car).
+
+The HybridVehicle class inherits from both Car and Motorcycle, making it an example of multiple inheritance. This class has access to properties and methods from both parent classes.
+
+#### Constructor Calls:
+
+In the HybridVehicle constructor, we call the constructors of both Car and Motorcycle to initialize the attributes defined in each.
+
+#### Method Overriding:
+
+The start_engine method in HybridVehicle overrides the method from both parent classes, and uses super().start_engine() to call the start_engine method from the first class in the inheritance order (which is Car).
+
+## 2.2 Multiple Inheritance using `super` and `mro`
+
+### Description
+
+This repository demonstrates how to use the `super()` function and the `mro()` method in Python to handle multiple inheritance. The code example provides insights into how Python resolves method calls and initializes classes in a multiple inheritance scenario.
+
+### Code Explanation
+
+#### Classes
+
+- **Apple**: A class representing an apple with attributes `color` and `taste`, and a method `message()` that prints a health-related message.
+- **Banana**: A class representing a banana with attributes `color` and `taste`, and a method `message()` that prints an energy-related message.
+- **Fruit**: A subclass that inherits from both `Apple` and `Banana`. This class is used to demonstrate the method resolution order (MRO) and how `super()` works in multiple inheritance.
+
+#### Key Features
+
+1. **Method Resolution Order (MRO)**: The `Fruit` class demonstrates how Python determines the order in which base classes are initialized and methods are resolved. The MRO can be viewed using `Fruit.__mro__` or `Fruit.mro()`.
+
+2. **Using `super()`**: The `Fruit` class uses `super()` in two different contexts:
+
+   - By default, `super()` refers to the first parent class in the MRO, which is `Apple` in this case.
+   - `super(Apple, self)` bypasses the `Apple` class and refers to the next class in the MRO, which is `Banana`.
+
+3. **Outside Class Access**: The code also shows how to access a method from a specific parent class outside of the `Fruit` class using `Banana.message(fruit)`.
+
+#### Usage
+
+The code creates an instance of `Fruit` and demonstrates the use of `super()` and `mro()` in multiple inheritance. It also prints the MRO of the `Fruit` class and accesses the `message()` method from both `Apple` and `Banana`.
+
+#### Example Code
+
+```python
+class Apple:
+    def __init__(self):
+        self.color = "Red"
+        self.taste = "Sweet"
+
+    def message(self):
+        print("An apple a day keeps the doctor away")
+
+class Banana:
+    def __init__(self):
+        self.color = "Yellow"
+        self.taste = "Sweet"
+
+    def message(self):
+        print("Bananas give us strength and power.")
+
+class Fruit(Apple, Banana):
+    def __init__(self):
+
+        # It will take the first inherited class by default - MRO
+        super().__init__()
+        print(self.color)
+        super().message()
+
+        # It will Ignore the Apple class, and takes the Banana Class - MRO
+        super(Apple, self).__init__()
+        print(self.color)
+        super(Apple, self).message()
+
+
+fruit = Fruit()
+fruit.message()  # An apple a day keeps the doctor away
+
+# MRO : Method Resolution Order
+print(Fruit.__mro__)  # (<class '__main__.Fruit'>, <class '__main__.Apple'>, <class '__main__.Banana'>, <class 'object'>)
+print(Fruit.mro())  # (<class '__main__.Fruit'>, <class '__main__.Apple'>, <class '__main__.Banana'>, <class 'object'>)
+
+# Outside the class access
+Banana.message(fruit)  # Bananas give us strength and power.
+
+```
+
+### Explanation:
+
+    The Fruit class inherits from both Apple and Banana, demonstrating how Python manages multiple inheritance.
+
+    **Method Resolution Order (MRO):**
+        Python determines the order in which base classes are called when methods are invoked using the MRO.
+    **super() Function:**
+        The super() function is used to call the next method in the MRO, allowing the Fruit class to interact with its parent classes in a flexible manner.
