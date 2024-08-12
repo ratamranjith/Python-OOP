@@ -183,9 +183,25 @@ class Motorcycle(Vehicle):
         super().start_engine()
         print("The motorcycle's engine is running...")
 
-car = Car("Tata", "Sierra", 1999, 4)
-car.start_engine()
+# Multiple inheritance: A hybrid vehicle that can be both a car and a motorcycle
+class HybridVehicle(Car, Motorcycle):
+    def __init__(self, brand, model, year, doors, engine_size):
+        Car.__init__(self, brand, model, year, doors)
+        Motorcycle.__init__(self, brand, model, year, engine_size)
 
-motorCycle = Motorcycle("Hero", "Splendor", 1995, 2)
-motorCycle.start_engine()
+    def start_engine(self):
+        print("The hybrid vehicle's engine is starting...")
+        super().start_engine()
+        print("The hybrid vehicle is running...")
+
+# Example usage
+hybrid = HybridVehicle("Tesla", "Model X", 2023, 4, "Electric")
+hybrid.start_engine()
 ```
+### Explanation:
+#### Multiple Inheritance: 
+   The HybridVehicle class inherits from both Car and Motorcycle, making it an example of multiple inheritance. This class has access to properties and methods from both parent classes.
+#### Constructor Calls: 
+   In the HybridVehicle constructor, we call the constructors of both Car and Motorcycle to initialize the attributes defined in each.
+#### Method Overriding: 
+   The start_engine method in HybridVehicle overrides the method from both parent classes, and uses super().start_engine() to call the start_engine method from the first class in the inheritance order (which is Car).
