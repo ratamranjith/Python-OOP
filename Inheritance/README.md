@@ -129,3 +129,63 @@ print(duck.swim())  # Inherited from Swimmable
 #### Explanation:
 
 The Duck class inherits features from both Flyable and Swimmable classes, so a duck can both fly and swim.
+
+# 2.1 Multiple Inheritance with Super Class
+
+## Description
+
+This repository demonstrates how to implement multiple inheritance in Python using a simple example. The code defines a base class, `Vehicle`, and two subclasses, `Car` and `Motorcycle`. The `Car` and `Motorcycle` classes inherit from the `Vehicle` class, showcasing how each subclass can override methods while still accessing the base class's functionality.
+
+## Code Explanation
+
+### Classes
+
+- **Vehicle**: The base class with attributes `brand`, `model`, and `year`, and a method `start_engine()` that prints a basic message about starting the engine.
+- **Car**: Inherits from `Vehicle` and adds an attribute `doors`. It overrides the `start_engine()` method to include additional functionality specific to a car, while still calling the base class's method using `super()`.
+- **Motorcycle**: Inherits from `Vehicle` and adds an attribute `engine_size`. It also overrides the `start_engine()` method, incorporating its own behavior along with the base class's method.
+
+### Usage
+
+The code creates instances of `Car` and `Motorcycle` and calls their `start_engine()` methods to demonstrate how the method overriding works.
+
+### Example Code
+
+```python
+class Vehicle:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+
+    def start_engine(self):
+        print("The engine is starting...")
+        print("The vehicle is ready to move.")
+
+class Car(Vehicle):
+    def __init__(self, brand, model, year, doors):
+        super().__init__(brand, model, year)
+        self.doors = doors
+
+    def start_engine(self):
+        print("The car's engine is starting...")
+        print("The car is ready to move.")
+        super().start_engine()
+        print("The car's engine is running...")
+
+class Motorcycle(Vehicle):
+    def __init__(self, brand, model, year, engine_size):
+        super().__init__(brand, model, year)
+        self.engine_size = engine_size
+
+    def start_engine(self):
+        print("The motorcycle's engine is starting...")
+        print("The motorcycle is ready to move.")
+        super().start_engine()
+        print("The motorcycle's engine is running...")
+
+car = Car("Tata", "Sierra", 1999, 4)
+car.start_engine()
+
+motorCycle = Motorcycle("Hero", "Splendor", 1995, 2)
+motorCycle.start_engine()
+```
