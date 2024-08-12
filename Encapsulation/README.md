@@ -55,3 +55,10 @@ account.deposit(500)  # Deposited 500. New balance is 1500.
 account.withdraw(200)  # Withdrew 200. New balance is 1300.
 account.display_account_info()
 ```
+
+### Output
+
+Deposited 500. New balance is 1500.
+Withdrew 200. New balance is 1300.
+Account Holder: John Doe
+Balance: 1300
