@@ -52,6 +52,5 @@ class HybridVehicle(Car, Motorcycle):
         Motorcycle.start_engine(self)
         print("The hybrid vehicle is running...")
 
-# Example usage
 hybrid = HybridVehicle("Tesla", "Model X", 2023, 4, "Electric")
 hybrid.start_engine()
