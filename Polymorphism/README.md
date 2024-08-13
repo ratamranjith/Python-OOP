@@ -19,16 +19,16 @@ Compile-time polymorphism is determined at the time of code compilation and is a
 
 Run-time polymorphism is determined at runtime and is also known as dynamic polymorphism. This type can be achieved through:
 
+- **Duck Typing**: A concept where the type of an object is determined by its behavior (methods and properties) rather than its class or inheritance.
 - **Method Overriding**: Redefining a method in a derived class that already exists in its base class.
 - **Polymorphic Functions**: Functions that can accept arguments of different types and respond accordingly.
-- **Duck Typing**: A concept where the type of an object is determined by its behavior (methods and properties) rather than its class or inheritance.
 - **Abstract Base Classes (ABCs)**: Using abstract classes and methods to define common interfaces for a group of classes.
 
-## Example: Duck Typing
+### 2.1 - Duck Typing
 
 Duck typing is a concept in Python where an object's suitability is determined by the presence of certain methods and properties, rather than the object's type. If an object has the required method or attribute, it can be used in place of another object, regardless of its class.
 
-### Code Implementation
+#### Code Implementation
 
 Here's an example demonstrating duck typing:
 
@@ -57,3 +57,49 @@ print(initiate_communication(human))  # Output: Hello!
 - Function initiate_communication(): This function accepts any object and calls its communicate() method, demonstrating polymorphism.
 - **Duck Typing:**
   Despite the objects alien and human being instances of different classes, the initiate_communication() function works with both because they share the same method name.
+
+### 1.1 Compile-Time Polymorphism (Method Overloading)
+
+### Overview
+
+**Method Overloading** is a form of compile-time polymorphism where multiple methods share the same name but differ in the number or type of parameters. Languages like Java and C++ support method overloading inherently, allowing developers to define multiple methods with the same name but different signatures within the same class.
+
+However, **Python does not support traditional method overloading**. Instead, similar behavior can be achieved using:
+
+- **Default Argument Values**: Providing default values for parameters allows a single method to handle multiple scenarios.
+- **Variable-Length Arguments (`*args`, `**kwargs`)\*\*: Accepting arbitrary numbers of positional and keyword arguments.
+- **Type Checking Within Methods**: Implementing logic inside a method to handle different types or numbers of arguments.
+
+## Example: Using Default Arguments
+
+In this example, we demonstrate how to mimic method overloading behavior using default arguments in Python.
+
+### Code Implementation
+
+```python
+class SpaceShip:
+
+    def __init__(self):
+        print("Spaceship Class Initiated")
+
+    def launch(self, crew_size=1, fuel_type="liquid"):
+        """
+        Launches the spaceship.
+
+        Parameters:
+        - crew_size (int): Number of crew members. Defaults to 1.
+        - fuel_type (str): Type of fuel used. Defaults to "liquid".
+
+        Returns:
+        - str: Description of the launch.
+        """
+        if crew_size == 1:
+            return f"Launching a single-seater spaceship with {fuel_type} fuel."
+        else:
+            return f"Launching a spaceship with {crew_size} crew members and {fuel_type} fuel."
+
+# Example Usage
+ship = SpaceShip()
+print(ship.launch())  # Uses default arguments
+print(ship.launch(5, "solid"))  # Overrides default arguments
+```
