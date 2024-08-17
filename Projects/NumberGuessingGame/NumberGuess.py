@@ -1,6 +1,4 @@
 import random
-
-
 class NumberGuess:
     def __init__(self):
         self.number = None
@@ -22,7 +20,6 @@ class NumberGuess:
                 self.guessCount += 1
             else:
                 print("You guessed it in {self.guessCount} attempts")
-
 
 num = NumberGuess()
 num.generate_random()
